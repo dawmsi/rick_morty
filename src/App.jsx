@@ -5,13 +5,29 @@ import { Home } from './pages/Home'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getData } from './service/getData'
+import { useDebounce } from './hooks/useDebounce'
 
 function App() {
+  const localSK = 'searchInput'
+  const [searchInput, setSearchInput] = useState(
+    localStorage.getItem(localSK) ?? ''
+  )
+  const debounced = useDebounce(searchInput, 400)
+
+  const [info, setInfo] = useState({})
   const [list, setList] = useState([])
 
+  console.log(info)
+
   useEffect(() => {
-    getData(setList)
-  }, [])
+    if (debounced) {
+      getData(setList, setInfo, `?name=${debounced}`)
+      localStorage.setItem(localSK, searchInput)
+    } else {
+      getData(setList, setInfo)
+      localStorage.removeItem(localSK)
+    }
+  }, [debounced])
 
   return (
     <BrowserRouter>
@@ -27,7 +43,14 @@ function App() {
             <Routes>
               <Route
                 path='/'
-                element={<Home list={list} setList={setList} />}
+                element={
+                  <Home
+                    count={info.count}
+                    list={list}
+                    searchInput={searchInput}
+                    setSearchInput={setSearchInput}
+                  />
+                }
               />
               <Route path='/details' element={<Details />} />
             </Routes>

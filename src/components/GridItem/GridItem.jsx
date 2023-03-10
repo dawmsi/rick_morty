@@ -5,21 +5,23 @@ export const GridItem = ({ item: { name, image, species } }) => {
     <div
       style={{
         boxShadow:
-          '0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14)',
+          '0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14)'
       }}
-      className='flex flex-col justify-between h-[308px] w-[312px] md:w-[240px] md:h-[244px] mt-[8px] rounded-[4px] overflow-hidden item-shadow'
+      className='relative flex flex-col justify-between h-[308px] w-[312px] md:w-[240px] md:h-[244px] mt-[8px] rounded-[4px] overflow-hidden item-shadow'
     >
-      <div className='h-[237px]'>
+      <div className='h-fit'>
         <img
-          className='w-full h-full object-cover'
+          className='w-full h-full object-cover object-center'
           src={image ? image : TempImg}
           alt='img'
         />
       </div>
-      <div className='px-4 py-[10px]'>
-        <h2 className='font-medium text-[20px] leading-[30px]'>{name}</h2>
+      <div className='absolute h-fit bg-white w-full bottom-0 px-4 py-[10px]'>
+        <h2 className='w-full truncate hover:whitespace-normal font-medium text-[20px] leading-[30px]'>
+          {name}
+        </h2>
         <p className='font-normal text-[14px] text-black text-opacity-60 leading-[21px]'>
-          {species}
+          {species.charAt(0).toUpperCase() + species.slice(1)}
         </p>
       </div>
     </div>

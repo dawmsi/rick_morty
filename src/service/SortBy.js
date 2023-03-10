@@ -1,4 +1,4 @@
-export const SortBy = (array, by = 'name') => {
+export const sortBy = (array, by = 'name') => {
   array.sort(function (a, b) {
     if (a[by] < b[by]) {
       return -1
@@ -8,4 +8,5 @@ export const SortBy = (array, by = 'name') => {
     }
     return 0
   })
+  return array
 }

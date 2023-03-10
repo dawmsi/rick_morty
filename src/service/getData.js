@@ -1,17 +1,13 @@
 import axios from 'axios'
-import { SortBy } from './SortBy'
+import { sortBy } from './sortBy/'
 
-const params = '1,2,3,4,5,6,7,8'
-
-const url = `https://rickandmortyapi.com/api/character/${params}`
-
-export const getData = (fc) => {
+export const getData = (setList, setInfo, _params = '') => {
+  const url = `https://rickandmortyapi.com/api/character/${_params}`
   axios
     .get(url)
     .then((res) => {
-      const data = res.data
-      SortBy(data)
-      fc(data)
+      setList(sortBy(res.data.results))
+      setInfo(res.data.info)
     })
     .catch((e) => console.log(e))
 }
