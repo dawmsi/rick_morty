@@ -1,12 +1,12 @@
 import React from 'react'
 import { GridList, Logo, SearchLine } from '../components'
 
-export const Home = () => {
+export const Home = ({list}) => {
   return (
     <>
       <Logo />
       <SearchLine />
-      <GridList />
+      <GridList list={list}/>
     </>
   )
 }
