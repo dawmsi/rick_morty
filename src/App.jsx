@@ -25,7 +25,10 @@ function App() {
           </Header>
           <Main>
             <Routes>
-              <Route path='/' element={<Home list={list} />} />
+              <Route
+                path='/'
+                element={<Home list={list} setList={setList} />}
+              />
               <Route path='/details' element={<Details />} />
             </Routes>
           </Main>

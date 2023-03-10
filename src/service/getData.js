@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { SortBy } from './SortBy'
 
 const params = '1,2,3,4,5,6,7,8'
 
@@ -9,6 +10,7 @@ export const getData = (fc) => {
     .get(url)
     .then((res) => {
       const data = res.data
+      SortBy(data)
       fc(data)
     })
     .catch((e) => console.log(e))
