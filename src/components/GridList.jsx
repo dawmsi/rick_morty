@@ -9,7 +9,7 @@ export const GridList = ({ list }) => {
           item.name.toUpperCase().includes(debounced.toUpperCase()),
         ) */
         .map((item) => (
-          <Link key={item.id} to='/details'>
+          <Link key={item.id} to={`/details/${item.id}`}>
             <GridItem item={item} />
           </Link>
         ))}

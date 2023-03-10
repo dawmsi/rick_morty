@@ -1,6 +1,10 @@
 import SearchIcon from '../assets/search.svg'
 
-export const SearchLine = ({ searchInput, setSearchInput }) => {
+export const SearchLine = ({
+  setSearchParams,
+  searchInput,
+  setSearchInput
+}) => {
   return (
     <div className='flex px-4 items-center w-full mt-[32px] text-black text-opacity-50 border-[2px] rounded-[6px]'>
       <div>
@@ -13,6 +17,7 @@ export const SearchLine = ({ searchInput, setSearchInput }) => {
           type='text'
           placeholder='Filter by name...'
           onChange={(e) => {
+            setSearchParams({ page: 1 })
             setSearchInput(e.target.value)
           }}
         />
