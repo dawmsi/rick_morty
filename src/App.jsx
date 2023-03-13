@@ -1,70 +1,30 @@
-import { HeaderBack } from './components'
+import { Routes, Route } from 'react-router-dom'
+
+import { HeaderBack, AuthButton } from './components'
 import { Header, Main } from './layouts'
-import { Details } from './pages/Details'
-import { Home } from './pages/Home'
-import { Routes, Route, useSearchParams, useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
-import { getData } from './service/getData'
-import { useDebounce } from './hooks/useDebounce'
+import { Login, Home, Details, NotFound, NeedAuth } from './pages'
+import { ProtectedRoute } from './routes'
 
 function App() {
-  const location = useLocation()
-
-  const localSK = 'searchInput'
-  const [searchInput, setSearchInput] = useState(
-    localStorage.getItem(localSK) ?? ''
-  )
-
-  const debounced = useDebounce(searchInput, 400)
-
-  const [info, setInfo] = useState({})
-  const [list, setList] = useState([])
-
-  const [searchParams, setSearchParams] = useSearchParams()
-
-  useEffect(() => {
-    if (!location.path === '/' && !searchParams.get('page')) {
-      setSearchParams({ page: '1' })
-    }
-
-    const page = searchParams.get('page')
-    console.log(searchParams)
-
-    if (debounced) {
-      getData(setList, setInfo, `?page=${page}&name=${debounced}`)
-      localStorage.setItem(localSK, searchInput)
-    } else {
-      getData(setList, setInfo, `?page=${page}`)
-      localStorage.removeItem(localSK)
-    }
-  }, [debounced, searchParams])
-
   return (
     <div className='app'>
-      <div className='container max-w-[1100px] flex flex-col justify-center m-auto'>
+      <div className='container max-w-[1100px] flex flex-col justify-end m-auto'>
         <Header>
           <Routes>
-            <Route path='/' element={''} />
+            <Route path='/' element={<AuthButton />} />
             <Route path='/details/:id' element={<HeaderBack />} />
+            <Route path='*' element={<HeaderBack />} />
           </Routes>
         </Header>
         <Main>
           <Routes>
-            <Route
-              path='/'
-              element={
-                <Home
-                  page={+searchParams.get('page')}
-                  count={info.count}
-                  pagesCount={info.pages}
-                  list={list}
-                  searchInput={searchInput}
-                  setSearchInput={setSearchInput}
-                  setSearchParams={setSearchParams}
-                />
-              }
-            />
-            <Route path='/details/:id' element={<Details />} />
+            <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/needAuth' element={<NeedAuth />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path='/details/:id' element={<Details />} />
+            </Route>
+            <Route path='*' element={<NotFound />} />
           </Routes>
         </Main>
       </div>

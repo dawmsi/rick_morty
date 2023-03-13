@@ -1,7 +1,10 @@
-import { GridItem } from './GridItem/GridItem'
-import { Link } from 'react-router-dom'
+import { GridItem } from './GridItem'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export const GridList = ({ list }) => {
+  const location = useLocation()
+  const navigate = useNavigate()
+
   return (
     <div className='mt-[28px] flex flex-wrap justify-center gap-6 mb-6'>
       {list
@@ -9,9 +12,16 @@ export const GridList = ({ list }) => {
           item.name.toUpperCase().includes(debounced.toUpperCase()),
         ) */
         .map((item) => (
-          <Link key={item.id} to={`/details/${item.id}`}>
+          <div
+            key={item.id}
+            onClick={() => {
+              navigate(`/details/${item.id}`, {
+                state: { prev: location }
+              })
+            }}
+          >
             <GridItem item={item} />
-          </Link>
+          </div>
         ))}
     </div>
   )

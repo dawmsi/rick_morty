@@ -1,2 +1,5 @@
 export * from './Home'
 export * from './Details'
+export * from './Login'
+export * from './NotFound'
+export * from './NeedAuth'

@@ -1,14 +1,8 @@
-import TempImg from '../../assets/image.png'
+import TempImg from '../assets/image.png'
 
 export const GridItem = ({ item: { name, image, species } }) => {
   return (
-    <div
-      style={{
-        boxShadow:
-          '0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14)'
-      }}
-      className='relative flex flex-col justify-between h-[308px] w-[312px] md:w-[240px] md:h-[244px] mt-[8px] rounded-[4px] overflow-hidden item-shadow'
-    >
+    <div className='item__shadow relative flex flex-col justify-between h-[308px] w-[312px] md:w-[240px] md:h-[244px] mt-[8px] rounded-[4px] overflow-hidden item-shadow'>
       <div className='h-fit'>
         <img
           className='w-full h-full object-cover object-center'

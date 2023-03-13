@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { fetchItem } from '../service/getData'
+import { fetchItem } from '../service'
 
 export const Details = () => {
   const { id } = useParams()

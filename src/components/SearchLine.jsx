@@ -1,10 +1,11 @@
 import SearchIcon from '../assets/search.svg'
+import { useNavigate } from 'react-router-dom'
 
 export const SearchLine = ({
-  setSearchParams,
   searchInput,
   setSearchInput
 }) => {
+  const navigate = useNavigate()
   return (
     <div className='flex px-4 items-center w-full mt-[32px] text-black text-opacity-50 border-[2px] rounded-[6px]'>
       <div>
@@ -17,7 +18,7 @@ export const SearchLine = ({
           type='text'
           placeholder='Filter by name...'
           onChange={(e) => {
-            setSearchParams({ page: 1 })
+            navigate('/')
             setSearchInput(e.target.value)
           }}
         />
