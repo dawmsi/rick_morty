@@ -8,8 +8,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <>
     <BrowserRouter>
       <Routes>
-        <Route index element={<App />} />
-        <Route path='/rick_morty/*' element={<App />} />
+        <Route path='/*' element={<App />} />
       </Routes>
     </BrowserRouter>
   </>
