@@ -31,12 +31,13 @@ export const Home = () => {
     <>
       <Logo setSearchInput={setSearchInput} />
       <SearchLine searchInput={searchInput} setSearchInput={setSearchInput} />
-      <p className='mt-2 text-lg font-bold text-center'>Count: {info.count}</p>
+      <p className='mt-2 text-lg font-bold text-center'>Count: {info?.count || 0}</p>
       {list.length ? (
         <>
           <GridList list={list} />
           <ControlPages
-            pagesCount={info.count || 1}
+            page={getPageFromParams(searchParams)}
+            pagesCount={info?.pages || 1}
             searchParams={searchParams}
             setSearchParams={setSearchParams}
           />

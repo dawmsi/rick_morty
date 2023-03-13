@@ -4,6 +4,8 @@ import { getPageFromParams } from '../utils/getPageFromParams'
 export const ControlPages = ({ pagesCount, searchParams, setSearchParams }) => {
   const page = getPageFromParams(searchParams)
 
+  console.log(pagesCount, page)
+
   const btnsArr = []
   createPages(btnsArr, pagesCount, page)
 
