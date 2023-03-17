@@ -4,13 +4,11 @@ import { getPageFromParams } from '../utils/getPageFromParams'
 export const ControlPages = ({ pagesCount, searchParams, setSearchParams }) => {
   const page = getPageFromParams(searchParams)
 
-  console.log(pagesCount, page)
-
   const btnsArr = []
   createPages(btnsArr, pagesCount, page)
 
   return (
-    <div className='flex justify-center items-center mb-4'>
+    <div className='flex justify-center items-center mb-6'>
       {pagesCount > 1 &&
         btnsArr.map((currBtn) => {
           return (
